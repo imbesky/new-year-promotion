@@ -25,6 +25,8 @@ public enum Menu {
     WHITE_WINE("화이트 와인", 55_000, DRINK),
     SOJU("소주", 4_000, DRINK);
 
+    public static final int MIN_ORDER = 1;
+    public static final int MAX_ORDER = 10;
     private final static Map<String, Menu> menus = Collections.unmodifiableMap(Stream
             .of(values())
             .collect(Collectors
