@@ -6,6 +6,7 @@ import static imbesky.promotion.constant.MenuType.DRINK;
 import static imbesky.promotion.constant.MenuType.MAIN;
 
 import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -25,12 +26,14 @@ public enum Menu {
     WHITE_WINE("화이트 와인", 55_000, DRINK),
     SOJU("소주", 4_000, DRINK);
 
-    public static final int MIN_ORDER = 1;
-    public static final int MAX_ORDER = 10;
-    private final static Map<String, Menu> menus = Collections.unmodifiableMap(Stream
-            .of(values())
+    public final static Map<MenuType, List<Menu>> MENUS = Collections.unmodifiableMap(Stream
+            .of(MenuType.values())
             .collect(Collectors
-                    .toMap(Menu::getName, Menu -> Menu)));
+                    .toMap(
+                            MenuType -> MenuType,
+                            MenuType ->
+                                    Stream.of(values()).filter(Menu -> Menu.type == MenuType).toList()
+                    )));
     private final String name;
     private final int price;
     private final MenuType type;
@@ -53,7 +56,7 @@ public enum Menu {
         return type;
     }
 
-    public static Menu findByName(final String name) {
-        return menus.get(name);
+    public static Menu findByName(final String menu) {
+        return valueOf(menu);
     }
 }

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>visit</title>
+</head>
+<body>
+<div>
+    <h2 th:text="${greeting}"></h2>
+    <div>
+        <form action="/input">
+            <div>
+                <label for="date" th:text="${dateLabel}"></label>
+                <input type="date" id="date" name="date">
+                <span th:text="${dateNotice}"></span>
+            </div>
+            <div>
+                <label for="number" th:text="${numberLabel}"></label>
+                <input type="number" id="number" name="number">
+                <span th:text="${numberNotice}"></span>
+            </div>
+            <div id="menu-board">
+                <h3 th:text="${menuBoard}"></h3>
+                <table>
+                    <tr>
+                        <td th:each="menu : ${menus}">
+                            <table>
+                                <tr>
+                                    <th colspan="2" th:text="${menu.key}"></th>
+                                </tr>
+                                <tr>
+                                    <th th:text="${menuName}"></th>
+                                    <th th:text="${menuPrice}"></th>
+                                </tr>
+                                <tr th:each="detail : ${menu.value}">
+                                    <td th:text="${detail.getName()}"></td>
+                                    <td th:text="${detail.getPrize()}"></td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div>
+                <label for="order" th:text="${orderLabel}"></label>
+                <input type="text" id="order" name="order" th:placeholder="${orderFormat}">
+                <span th:text="${orderNotice}"></span>
+            </div>
+            <div>
+                <button type="submit"></button>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>

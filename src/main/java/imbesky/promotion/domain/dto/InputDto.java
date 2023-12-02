@@ -1,7 +1,8 @@
 package imbesky.promotion.domain.dto;
 
-public record VisitDto(
+public record InputDto(
         String date,
-        int number
+        int number,
+        String order
 ) {
 }
