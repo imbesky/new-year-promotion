@@ -10,4 +10,5 @@ public class Format {
     public static final String DATE_NOTICE = "방문 날짜는 %s 에서 %s사이여야 합니다.";
     public static final String NUMBER_LABEL = "";
     public static final String NUMBER_NOTICE = "최소 방문 인원은 %d명, 주중 최대 방문 인원은 %d명, 주말 최대 방문 인원은 %d명입니다.";
+    public static final String REDIRECT_NOTICE = "이전 페이지로 돌아가기";
 }

@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>error</title>
+</head>
+<body>
+<div>
+    <h3 th:text="${message}"></h3>
+    <a th:href="${redirect}" th:text="${redirectNotice}" role="button"></a>
+</div>
+</body>
+</html>
