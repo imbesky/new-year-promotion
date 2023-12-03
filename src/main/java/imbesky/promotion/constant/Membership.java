@@ -21,7 +21,7 @@ public enum Membership {
         return standardPrice;
     }
 
-    public static Membership target(final int price) {
+    public static Membership of(final int price) {
         for (Membership membership : values()) {
             if (price >= membership.getStandardPrice()) {
                 return membership;
