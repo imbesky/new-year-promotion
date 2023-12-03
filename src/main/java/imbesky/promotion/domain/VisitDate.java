@@ -2,10 +2,11 @@ package imbesky.promotion.domain;
 
 import static imbesky.promotion.constant.Date.PROMOTION_END_DATE;
 import static imbesky.promotion.constant.Date.PROMOTION_START_DATE;
+import static imbesky.promotion.constant.Date.WEEKEND;
 import static imbesky.promotion.constant.Format.DATE_FORMAT;
+import static imbesky.promotion.constant.Number.PROPER_REST;
 
 import imbesky.promotion.exception.VisitDateException;
-import imbesky.promotion.util.DayUtil;
 import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -24,20 +25,28 @@ public class VisitDate {
     }
 
     private void validate(final LocalDate date) {
-        if (!DayUtil.isBetween(PROMOTION_START_DATE, PROMOTION_END_DATE, date)) {
+        if (!date.isBefore(PROMOTION_START_DATE) && !date.isAfter(PROMOTION_END_DATE)) {
             throw new VisitDateException();
         }
     }
 
-    public boolean isWeekday() {
-        return DayUtil.isWeekend(date);
+    public boolean isWeekend() {
+        return WEEKEND.contains(date.getDayOfWeek());
     }
 
     public boolean inRange(final LocalDate start, final LocalDate end) {
-        return DayUtil.isBetween(start, end, date);
+        return !date.isBefore(start) && !date.isAfter(end);
     }
 
-    public int dayOfMonth() {
-        return date.getDayOfMonth();
+    public boolean equals(final LocalDate date) {
+        return date.equals(this.date);
+    }
+
+    public boolean isDividedBy(final int divider) {
+        return date.getDayOfMonth() % divider == PROPER_REST;
+    }
+
+    public int daySince(final LocalDate date) {
+        return date.compareTo(this.date);
     }
 }
