@@ -1,4 +1,4 @@
-package imbesky.promotion.domain;
+package imbesky.promotion.domain.input;
 
 import static imbesky.promotion.constant.Number.VISIT_NUMBER_MIN;
 import static imbesky.promotion.constant.Number.VISIT_NUMBER_WEEKDAY_MAX;

@@ -1,4 +1,4 @@
-package imbesky.promotion.domain;
+package imbesky.promotion.domain.input;
 
 import static imbesky.promotion.constant.Date.PROMOTION_END_DATE;
 import static imbesky.promotion.constant.Date.PROMOTION_START_DATE;

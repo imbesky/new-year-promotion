@@ -6,7 +6,7 @@ import static imbesky.promotion.constant.MenuType.MAIN;
 
 import imbesky.promotion.constant.Menu;
 import imbesky.promotion.constant.MenuType;
-import imbesky.promotion.domain.Order;
+import imbesky.promotion.domain.input.Order;
 import java.util.Map;
 
 public class NewYearFreeGift implements FreeGift {

@@ -1,4 +1,4 @@
-package imbesky.promotion.domain;
+package imbesky.promotion.domain.input;
 
 import static imbesky.promotion.constant.Format.BLANK;
 import static imbesky.promotion.constant.Format.COMMA;

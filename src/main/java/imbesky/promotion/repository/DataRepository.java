@@ -1,8 +1,9 @@
 package imbesky.promotion.repository;
 
-import imbesky.promotion.domain.Order;
-import imbesky.promotion.domain.VisitDate;
-import imbesky.promotion.domain.VisitNumber;
+import imbesky.promotion.domain.Benefit;
+import imbesky.promotion.domain.input.Order;
+import imbesky.promotion.domain.input.VisitDate;
+import imbesky.promotion.domain.input.VisitNumber;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -11,6 +12,7 @@ public class DataRepository {
     private VisitDate visitDate;
     private VisitNumber visitNumber;
     private Order order;
+    private Benefit benefit;
 
     public VisitDate saveVisitDate(final VisitDate visitDate) {
         this.visitDate = visitDate;
@@ -27,6 +29,11 @@ public class DataRepository {
         return order;
     }
 
+    public Benefit saveBenefit(final Benefit benefit) {
+        this.benefit = benefit;
+        return benefit;
+    }
+
     public VisitDate inquireVisitDate() {
         return visitDate;
     }
@@ -37,6 +44,10 @@ public class DataRepository {
 
     public Order inquireOrder() {
         return order;
+    }
+
+    public Benefit inquireBenefit() {
+        return benefit;
     }
 
 }

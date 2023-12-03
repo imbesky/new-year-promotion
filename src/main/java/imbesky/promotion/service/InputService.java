@@ -1,9 +1,9 @@
 package imbesky.promotion.service;
 
-import imbesky.promotion.domain.Order;
-import imbesky.promotion.domain.VisitDate;
-import imbesky.promotion.domain.VisitNumber;
 import imbesky.promotion.domain.dto.InputDto;
+import imbesky.promotion.domain.input.Order;
+import imbesky.promotion.domain.input.VisitDate;
+import imbesky.promotion.domain.input.VisitNumber;
 import imbesky.promotion.repository.DataRepository;
 import org.springframework.stereotype.Service;
 
