@@ -4,5 +4,7 @@ public interface Discount {
 
     boolean applicable();
 
+    String type();
+
     int value();
 }

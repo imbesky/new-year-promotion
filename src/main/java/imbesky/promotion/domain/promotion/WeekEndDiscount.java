@@ -5,8 +5,8 @@ import static imbesky.promotion.constant.MenuType.MAIN;
 
 import imbesky.promotion.constant.DiscountDetail;
 import imbesky.promotion.constant.MenuType;
-import imbesky.promotion.domain.Order;
-import imbesky.promotion.domain.VisitDate;
+import imbesky.promotion.domain.input.Order;
+import imbesky.promotion.domain.input.VisitDate;
 
 public class WeekEndDiscount implements Discount {
     public final static DiscountDetail TYPE = WEEKEND;
@@ -23,6 +23,11 @@ public class WeekEndDiscount implements Discount {
     public boolean applicable() {
         return visitDate.inRange(TYPE.getStartDate(), TYPE.getEndDate())
                 && !visitDate.isWeekend();
+    }
+
+    @Override
+    public String type() {
+        return TYPE.getName();
     }
 
     @Override

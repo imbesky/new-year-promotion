@@ -4,7 +4,8 @@ public enum Membership {
     PLATINUM("백금", 50_000),
     GOLD("금", 20_000),
     SILVER("은", 10_000),
-    BRONZE("동", 5_000);
+    BRONZE("동", 5_000),
+    NONE(Format.NONE, 0);
     private final String name;
     private final int standardPrice;
 
@@ -27,6 +28,6 @@ public enum Membership {
                 return membership;
             }
         }
-        return null;
+        throw new IllegalStateException();
     }
 }
