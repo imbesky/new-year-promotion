@@ -5,18 +5,23 @@ import static imbesky.promotion.constant.Format.COMMA;
 import static imbesky.promotion.constant.Format.DASH;
 import static imbesky.promotion.constant.Format.EMPTY;
 import static imbesky.promotion.constant.Number.FIRST_INDEX;
+import static imbesky.promotion.constant.Number.INITIAL_VALUE;
 import static imbesky.promotion.constant.Number.ORDER_MAX;
 import static imbesky.promotion.constant.Number.ORDER_MIN;
 import static imbesky.promotion.constant.Number.SECOND_INDEX;
 
 import imbesky.promotion.constant.Menu;
+import imbesky.promotion.constant.MenuType;
 import imbesky.promotion.exception.OrderException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Map.Entry;
+import java.util.stream.Collectors;
 
 public class Order {
     private final Map<Menu, Integer> orders = new HashMap<>();
-    private int totalOrderedNumber = 0;
+    private int totalOrderedNumber = INITIAL_VALUE;
+    private int totalPrice = INITIAL_VALUE;
 
     public Order(final String input, final int visitNumber) {
         String[] orders = input.replace(BLANK, EMPTY).split(COMMA);
@@ -53,9 +58,26 @@ public class Order {
     private void save(final String[] detail) {
         orders.put(Menu.findByName(detail[FIRST_INDEX]), Integer.parseInt(detail[SECOND_INDEX]));
         totalOrderedNumber += Integer.parseInt(detail[SECOND_INDEX]);
+        totalPrice += Menu.findByName(detail[FIRST_INDEX]).getPrice() * Integer.parseInt(detail[SECOND_INDEX]);
     }
 
-    public int orderedNumber(final Menu menu) {
+    public int numberOf(final Menu menu) {
         return orders.get(menu);
+    }
+
+    public int numberOf(final MenuType menuType) {
+        return orders.entrySet().stream()
+                .filter(order -> order.getKey().getType().equals(menuType))
+                .mapToInt(Entry::getValue).sum();
+    }
+
+    public Map<Menu, Integer> of(final MenuType menuType) {
+        return orders.entrySet().stream()
+                .filter(order -> order.getKey().getType().equals(menuType))
+                .collect(Collectors.toMap(Entry::getKey, Entry::getValue));
+    }
+
+    public int totalPrice() {
+        return totalPrice;
     }
 }
