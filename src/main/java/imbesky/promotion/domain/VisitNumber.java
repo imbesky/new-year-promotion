@@ -9,18 +9,18 @@ import imbesky.promotion.exception.VisitNumberException;
 public class VisitNumber {
     private final int number;
 
-    public VisitNumber(final int number, final boolean isWeekday) {
-        validate(number, isWeekday);
+    public VisitNumber(final int number, final boolean isWeekend) {
+        validate(number, isWeekend);
         this.number = number;
     }
 
-    private void validate(final int number, final boolean isWeekday) {
+    private void validate(final int number, final boolean isWeekend) {
         if (number < VISIT_NUMBER_MIN) {
             throw new VisitNumberException();
         }
-        if (isWeekday && number > VISIT_NUMBER_WEEKDAY_MAX) {
+        if (isWeekend && number > VISIT_NUMBER_WEEKEND_MAX) {
             throw new VisitNumberException();
-        } else if (number > VISIT_NUMBER_WEEKEND_MAX) {
+        } else if (number > VISIT_NUMBER_WEEKDAY_MAX) {
             throw new VisitNumberException();
         }
     }

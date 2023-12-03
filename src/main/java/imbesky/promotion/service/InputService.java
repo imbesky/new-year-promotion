@@ -17,7 +17,7 @@ public class InputService {
 
     public void save(final InputDto inputDto) {
         final VisitDate visitDate = saveVisitDate(inputDto.date());
-        final VisitNumber visitNumber = saveVisitNumber(inputDto.number(), visitDate.isWeekday());
+        final VisitNumber visitNumber = saveVisitNumber(inputDto.number(), visitDate.isWeekend());
         saveOrder(inputDto.order(), visitNumber.getNumber());
     }
 
