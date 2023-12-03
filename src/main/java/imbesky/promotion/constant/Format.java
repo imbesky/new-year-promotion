@@ -5,6 +5,7 @@ public class Format {
     public static final String BLANK = " ";
     public static final String DASH = "-";
     public static final String COMMA = ",";
+    public static final String NONE = "없음";
     public static final String ORDER_FORMAT = "%s %d개";
     public static final String PRICE_FORMAT = "###,##0";
     public static final String GREETING = "새해 프로모션 플래너에 오신 것을 환영합니다! 아래의 정보를 입력해 주세요.";
