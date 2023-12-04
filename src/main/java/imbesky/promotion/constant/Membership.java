@@ -1,5 +1,7 @@
 package imbesky.promotion.constant;
 
+import static imbesky.promotion.constant.Number.MINUS;
+
 public enum Membership {
     PLATINUM("백금", 50_000),
     GOLD("금", 20_000),
@@ -24,7 +26,7 @@ public enum Membership {
 
     public static Membership of(final int price) {
         for (Membership membership : values()) {
-            if (price >= membership.getStandardPrice()) {
+            if (price * MINUS >= membership.getStandardPrice()) {
                 return membership;
             }
         }

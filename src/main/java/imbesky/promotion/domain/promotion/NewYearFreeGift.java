@@ -1,17 +1,14 @@
 package imbesky.promotion.domain.promotion;
 
-import static imbesky.promotion.constant.Menu.SOJU;
-import static imbesky.promotion.constant.Menu.SPRITE;
-import static imbesky.promotion.constant.MenuType.MAIN;
-
+import imbesky.promotion.constant.FreeGiftDetail;
 import imbesky.promotion.constant.Menu;
-import imbesky.promotion.constant.MenuType;
 import imbesky.promotion.domain.input.Order;
 import java.util.Map;
 
 public class NewYearFreeGift implements FreeGift {
-    public final static MenuType TARGET = MAIN;
+    private final static int MIN_INDEX_FROM_BACK = 1;
     private final Order order;
+    private FreeGiftDetail gift;
 
     public NewYearFreeGift(Order order) {
         this.order = order;
@@ -19,7 +16,9 @@ public class NewYearFreeGift implements FreeGift {
 
     @Override
     public boolean applicable() {
-        return order.totalPrice() >= 50_000;
+        return order.totalPrice()
+                >= FreeGiftDetail.values()[FreeGiftDetail.values().length - MIN_INDEX_FROM_BACK]
+                .getStandardPrice();
     }
 
     @Override
@@ -28,13 +27,11 @@ public class NewYearFreeGift implements FreeGift {
     }
 
     private Menu checkGiftMenu() {
-        if (order.totalPrice() >= 100_000) {
-            return SOJU;
-        }
-        return SPRITE;
+        gift = FreeGiftDetail.of(order.totalPrice());
+        return gift.getMenu();
     }
 
     private int checkGiftNumber() {
-        return order.numberOf(TARGET);
+        return order.numberOf(gift.getTarget()) * gift.getNumber();
     }
 }

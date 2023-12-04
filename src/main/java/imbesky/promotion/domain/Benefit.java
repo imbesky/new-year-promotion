@@ -1,5 +1,10 @@
 package imbesky.promotion.domain;
 
+import static imbesky.promotion.constant.Format.NONE;
+import static imbesky.promotion.constant.FreeGiftDetail.FREE_GIFT;
+import static imbesky.promotion.constant.Number.INITIAL_VALUE;
+import static imbesky.promotion.constant.Number.MINUS;
+
 import imbesky.promotion.constant.Membership;
 import imbesky.promotion.domain.dto.BenefitDto;
 import imbesky.promotion.domain.input.Order;
@@ -34,25 +39,35 @@ public class Benefit {
     }
 
     public BenefitDto toDto() {
-        final Map<String, Integer> discounts = discounts();
-        final int totalBenefitPrice = discounts.values().stream().mapToInt(i -> i).sum();
-        return new BenefitDto(discounts, freeGifts(), Membership.of(totalBenefitPrice).getName());
+        final Map<String, Integer> benefits = benefits();
+        final int totalBenefitPrice = benefits.values().stream().mapToInt(i -> i).sum();
+        return new BenefitDto(
+                freeGifts(), benefits, totalBenefitPrice, Membership.of(totalBenefitPrice).getName());
     }
 
-    private Map<String, Integer> discounts() {
-        return discounts.stream()
+    private Map<String, Integer> benefits() {
+        final Map<String, Integer> benefits = discounts.stream()
                 .filter(Discount::applicable)
+                .filter(Discount -> Discount.value() != INITIAL_VALUE)
                 .collect(Collectors.toMap(
                         Discount::type,
-                        Discount::value
+                        Discount -> Discount.value() * MINUS
                 ));
+        if (newYearFreeGift.applicable()) {
+            benefits.put(FREE_GIFT, newYearFreeGift.result().entrySet().stream()
+                    .mapToInt(gift -> gift.getKey().getPrice() * gift.getValue()).sum() * MINUS);
+        }
+        return benefits;
     }
 
     private Map<String, Integer> freeGifts() {
-        return newYearFreeGift.result().entrySet().stream()
-                .collect(Collectors.toMap(
-                        Entry -> Entry.getKey().getName(),
-                        Entry::getValue
-                ));
+        if (newYearFreeGift.applicable()) {
+            return newYearFreeGift.result().entrySet().stream()
+                    .collect(Collectors.toMap(
+                            Entry -> Entry.getKey().getName(),
+                            Entry::getValue
+                    ));
+        }
+        return Map.of(NONE, INITIAL_VALUE);
     }
 }

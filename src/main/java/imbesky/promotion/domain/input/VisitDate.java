@@ -53,7 +53,7 @@ public class VisitDate {
         return date.getDayOfMonth() % divider == PROPER_REST;
     }
 
-    public int daySince(final LocalDate date) {
-        return date.compareTo(this.date);
+    public int daysBetween(final LocalDate date) {
+        return Math.abs(date.getDayOfYear() - this.date.getDayOfYear());
     }
 }

@@ -22,7 +22,7 @@ public class WeekEndDiscount implements Discount {
     @Override
     public boolean applicable() {
         return visitDate.inRange(TYPE.getStartDate(), TYPE.getEndDate())
-                && !visitDate.isWeekend();
+                && visitDate.isWeekend();
     }
 
     @Override

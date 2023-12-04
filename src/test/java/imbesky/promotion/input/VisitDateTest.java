@@ -81,6 +81,6 @@ public class VisitDateTest {
 
         final LocalDate date = LocalDate.of(2024, 2, 10);
 
-        assertThat(visitDate.daySince(date)).isEqualTo(5);
+        assertThat(visitDate.daysBetween(date)).isEqualTo(5);
     }
 }

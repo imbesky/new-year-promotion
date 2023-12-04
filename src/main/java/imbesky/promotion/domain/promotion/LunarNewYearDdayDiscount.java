@@ -25,6 +25,7 @@ public class LunarNewYearDdayDiscount implements Discount {
 
     @Override
     public int value() {
-        return TYPE.getPriceDefault() + TYPE.getPriceUnit() * visitDate.daySince(TYPE.getStartDate());
+        return TYPE.getPriceDefault()
+                + TYPE.getPriceUnit() * visitDate.daysBetween(TYPE.getStartDate());
     }
 }
