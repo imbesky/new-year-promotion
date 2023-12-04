@@ -14,17 +14,25 @@ import java.util.stream.Stream;
 public enum Menu {
     BIBIM_RICE("비빔밥", 12_000, APPETIZER),
     PUMPKIN_PORRIDGE("호박죽", 6_500, APPETIZER),
-    CUCUMBER_SALAD("오이 무침", 4_000, APPETIZER),
-    EEL_STEAK("장어 구이", 52_000, MAIN),
+    CUCUMBER_SALAD("오이무침", 4_000, APPETIZER),
+    EEL_STEAK("장어구이", 52_000, MAIN),
     BULGOGI("불고기", 36_000, MAIN),
     GALBI_STEW("갈비찜", 45_000, MAIN),
-    NEW_YEAR_PLATTER("새해 특선", 60_000, MAIN),
+    NEW_YEAR_PLATTER("새해특선", 60_000, MAIN),
     RICE_CAKE("떡", 12_000, DESSERT),
     YAKGWA("약과", 5_000, DESSERT),
     PEAR_JUICE("배즙", 5_000, DRINK),
     SPRITE("스프라이트", 3_000, DRINK),
-    WHITE_WINE("화이트 와인", 55_000, DRINK),
+    WHITE_WINE("화이트와인", 55_000, DRINK),
     SOJU("소주", 4_000, DRINK);
+
+    private final static Map<String, Menu> ALL_MENU = Collections.unmodifiableMap(Stream
+            .of(values())
+            .collect(Collectors
+                    .toMap(
+                            Menu::getName,
+                            Menu -> Menu
+                    )));
 
     public final static Map<MenuType, List<Menu>> MENUS = Collections.unmodifiableMap(Stream
             .of(MenuType.values())
@@ -56,7 +64,7 @@ public enum Menu {
         return type;
     }
 
-    public static Menu findByName(final String menu) {
-        return valueOf(menu);
+    public static Menu findByName(final String name) {
+        return ALL_MENU.get(name);
     }
 }
