@@ -6,6 +6,7 @@ import static imbesky.promotion.constant.Date.WEEKEND;
 import static imbesky.promotion.constant.Format.DATE_FORMAT;
 import static imbesky.promotion.constant.Number.PROPER_REST;
 
+import imbesky.promotion.domain.dto.VisitDateDto;
 import imbesky.promotion.exception.VisitDateException;
 import java.time.DateTimeException;
 import java.time.LocalDate;
@@ -14,18 +15,24 @@ import java.time.format.DateTimeFormatter;
 public class VisitDate {
     private final LocalDate date;
 
-    public VisitDate(final String date) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATE_FORMAT);
+    public VisitDate(final String input) {
+        final DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATE_FORMAT);
+        final LocalDate date;
         try {
-            validate(LocalDate.parse(date, formatter));
+            date = LocalDate.from(formatter.parse(input));
         } catch (DateTimeException e) {
             throw new VisitDateException();
         }
-        this.date = LocalDate.parse(date, formatter);
+        validate(date);
+        this.date = date;
+    }
+
+    public VisitDateDto toDto() {
+        return new VisitDateDto(date.getMonthValue(), date.getDayOfMonth());
     }
 
     private void validate(final LocalDate date) {
-        if (!date.isBefore(PROMOTION_START_DATE) && !date.isAfter(PROMOTION_END_DATE)) {
+        if (date.isBefore(PROMOTION_START_DATE) || date.isAfter(PROMOTION_END_DATE)) {
             throw new VisitDateException();
         }
     }
