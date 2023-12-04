@@ -1,7 +1,7 @@
 package imbesky.promotion.controller;
 
-import static imbesky.promotion.constant.Format.REDIRECT_NOTICE;
 import static imbesky.promotion.constant.Url.REDIRECT;
+import static imbesky.promotion.constant.Url.REDIRECT_NOTICE;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
