@@ -79,7 +79,7 @@ public class InputController {
             inputService.save(inputDto);
             return REDIRECT.concat("result");
         } catch (IllegalArgumentException e) {
-            redirectAttributes.addAttribute("reason", e.getMessage());
+            redirectAttributes.addAttribute("detail", e.getMessage());
             return REDIRECT.concat(ERROR_PAGE);
         }
     }
