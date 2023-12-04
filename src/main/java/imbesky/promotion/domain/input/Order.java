@@ -4,6 +4,8 @@ import static imbesky.promotion.constant.Character.BLANK;
 import static imbesky.promotion.constant.Character.COMMA;
 import static imbesky.promotion.constant.Character.DASH;
 import static imbesky.promotion.constant.Character.EMPTY;
+import static imbesky.promotion.constant.MenuType.APPETIZER;
+import static imbesky.promotion.constant.MenuType.MAIN;
 import static imbesky.promotion.constant.Number.FIRST_INDEX;
 import static imbesky.promotion.constant.Number.INITIAL_VALUE;
 import static imbesky.promotion.constant.Number.ORDER_MAX;
@@ -33,7 +35,7 @@ public class Order {
         }
         finalValidate(visitNumber);
     }
-
+    
     private void orderValidate(final String[] detail) {
         final int orderNumber;
         try {
@@ -52,6 +54,12 @@ public class Order {
                 || totalOrderedNumber / visitNumber > ORDER_MAX) {
             throw new OrderException();
         }
+        for (Menu menu : orders.keySet()) {
+            if (menu.getType() == APPETIZER || menu.getType() == MAIN) {
+                return;
+            }
+        }
+        throw new OrderException();
     }
 
     private void save(final String[] detail) {

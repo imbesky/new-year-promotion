@@ -101,4 +101,13 @@ public class OrderTest {
         assertThat(order.totalPrice()).isEqualTo(64_000);
     }
 
+    @Test
+    @DisplayName("본식 혹은 전식이 없는 주문")
+    void orderNotIncludeMainOrAppetizer() {
+        final String input = "소주-5";
+        final int visitNumber = 1;
+
+        assertThrows(OrderException.class, () -> new Order(input, visitNumber));
+    }
+
 }
