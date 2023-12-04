@@ -6,25 +6,26 @@
     <link href="
 https://cdn.jsdelivr.net/npm/@picocss/pico@1.5.10/css/pico.min.css
 " rel="stylesheet">
+    <link href="/style.css" rel="stylesheet">
 </head>
 <body>
 <div>
-    <h1 th:text="${resultNotice}"></h1>
+    <h2 th:text="${resultNotice}"></h2>
     <div id="orders">
-        <h3 th:text="${orderHeader}"></h3>
-        <div th:each="order : ${order.orders()}">
+        <h4 th:text="${orderHeader}"></h4>
+        <div class="info" th:each="order : ${order.orders()}">
             <span th:text="${T(java.lang.String).format(orderFormat, order.key, order.value)}"></span>
         </div>
     </div>
     <div id="totalPrice">
-        <h3 th:text="${totalPriceHeader}"></h3>
-        <div>
+        <h4 th:text="${totalPriceHeader}"></h4>
+        <div class="info">
             <span th:text="${#numbers.formatInteger(order.totalPrice(), 1,'COMMA') + won}"></span>
         </div>
     </div>
     <div id="freeGift">
-        <h3 th:text="${freeGiftHeader}"></h3>
-        <div th:each="gift : ${benefit.freeGifts()}">
+        <h4 th:text="${freeGiftHeader}"></h4>
+        <div class="info" th:each="gift : ${benefit.freeGifts()}">
             <span th:if="${gift.key != none}"
                   th:text="${T(java.lang.String).format(freeGiftFormat, gift.key, gift.value)}"></span>
             <span th:if="${gift.key == none}"
@@ -32,33 +33,33 @@ https://cdn.jsdelivr.net/npm/@picocss/pico@1.5.10/css/pico.min.css
         </div>
     </div>
     <div id="benefits">
-        <h3 th:text="${benefitHeader}"></h3>
-        <div th:if="${benefit.discounts().size != 0}"
+        <h4 th:text="${benefitHeader}"></h4>
+        <div class="info" th:if="${benefit.discounts().size != 0}"
              th:each="discount : ${benefit.discounts()}">
             <span th:text="${T(java.lang.String).format(benefitFormat, discount.key,
             #numbers.formatInteger(discount.value, 1,'COMMA'))}"></span>
         </div>
-        <div th:if="${benefit.discounts().size == 0}">
+        <div class="info" th:if="${benefit.discounts().size == 0}">
             <span th:text="${none}"></span>
         </div>
     </div>
     <div id="totalBenefitPrice">
-        <h3 th:text="${totalBenefitPriceHeader}"></h3>
-        <div>
+        <h4 th:text="${totalBenefitPriceHeader}"></h4>
+        <div class="info">
             <span th:text="${#numbers.formatInteger(
             benefit.totalBenefitPrice(), 1,'COMMA') + won}"></span>
         </div>
     </div>
     <div id="purchasePrice">
-        <h3 th:text="${purchasePriceHeader}"></h3>
-        <div>
+        <h4 th:text="${purchasePriceHeader}"></h4>
+        <div class="info">
             <span th:text="${#numbers.formatInteger(
             order.totalPrice() + benefit.totalBenefitPrice(), 1, 'COMMA') + won}"></span>
         </div>
     </div>
     <div id="membership">
-        <h3 th:text="${membershipHeader}"></h3>
-        <div>
+        <h4 th:text="${membershipHeader}"></h4>
+        <div class="info">
             <span th:text="${benefit.membership()}"></span>
         </div>
     </div>

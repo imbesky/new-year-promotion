@@ -1,8 +1,12 @@
 # 새해 프로모션
 
-[우아한 테크코스 6기 프리코스 미션 '크리스마스 프로모션'](https://github.com/woowacourse-precourse/java-christmas-6) 변형 문제
+[우아한 테크코스 6기 프리코스 미션 '크리스마스 프로모션'](https://github.com/woowacourse-precourse/java-christmas-6) 변형 프로젝트
 
-## 기능 요구 사항
+## 사용 기술
+
+`Java 17` `Spring 3.2.0`
+
+## 요구 기능
 
 > 이메일 형식의 기능 요구 사항을 만족해 프로그램을 만들 것
 
@@ -47,7 +51,7 @@
 
 #### 이벤트 달력
 
-![달력](/img.png)
+![달력](src/main/resources/img/callender.png)
 
 #### 혜택 금액에 따른 새해 멤버십 등급 부여
 
@@ -146,7 +150,7 @@
 
 ---
 
-## 프로그램 요구 사항
+### 프로그램 요구 사항
 
 - `JDK 17`에서 정상적으로 작동할 것
 - 시작점은 `Application`의 `main()`
@@ -160,3 +164,33 @@
 - 단위 테스트를 구현할 것
 - 잘못된 값을 입력할 경우 `IllegalArgumentExcetion` 발생시키고 "[ERROR]"로 시작하는 에러 메세지 출력 후 재입력 받기
 - `InputView`, `OutputView`와 같은 입출력 담당 클래스를 별도로 구현할 것
+
+## 구현 기능
+
+### 입력
+
+***
+![img](src/main/resources/img/input.png)
+
+***
+![img](src/main/resources/img/inputExample.png)
+
+***
+
+1. 방문 날짜 입력
+2. 방문자 수 입력
+3. 주문 입력
+
+### 결과 출력
+
+***
+![img](src/main/resources/img/result.png)
+
+***
+
+### 에러 페이지
+
+***
+![img](src/main/resources/img/exception.png)
+
+***
