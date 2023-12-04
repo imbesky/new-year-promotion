@@ -11,6 +11,7 @@ https://cdn.jsdelivr.net/npm/@picocss/pico@1.5.10/css/pico.min.css
 <body>
 <div>
     <h2 th:text="${resultNotice}"></h2>
+    <h3 th:if="${order.totalPrice() < promotionApplicableMin}" th:text="${exclude}"></h3>
     <div id="orders">
         <h4 th:text="${orderHeader}"></h4>
         <div class="info" th:each="order : ${order.orders()}">
@@ -25,42 +26,57 @@ https://cdn.jsdelivr.net/npm/@picocss/pico@1.5.10/css/pico.min.css
     </div>
     <div id="freeGift">
         <h4 th:text="${freeGiftHeader}"></h4>
-        <div class="info" th:each="gift : ${benefit.freeGifts()}">
+        <div class="info" th:if="${order.totalPrice() >= promotionApplicableMin}"
+             th:each="gift : ${benefit.freeGifts()}">
             <span th:if="${gift.key != none}"
                   th:text="${T(java.lang.String).format(freeGiftFormat, gift.key, gift.value)}"></span>
             <span th:if="${gift.key == none}"
                   th:text="${none}"></span>
         </div>
+        <div class="info" th:if="${order.totalPrice() < promotionApplicableMin}">
+            <span th:text="${none}"></span>
+        </div>
     </div>
     <div id="benefits">
         <h4 th:text="${benefitHeader}"></h4>
-        <div class="info" th:if="${benefit.discounts().size != 0}"
+        <div class="info"
+             th:if="${benefit.discounts().size != 0 && order.totalPrice() >= promotionApplicableMin}"
              th:each="discount : ${benefit.discounts()}">
             <span th:text="${T(java.lang.String).format(benefitFormat, discount.key,
             #numbers.formatInteger(discount.value, 1,'COMMA'))}"></span>
         </div>
-        <div class="info" th:if="${benefit.discounts().size == 0}">
+        <div class="info"
+             th:if="${benefit.discounts().size == 0 || order.totalPrice() < promotionApplicableMin}">
             <span th:text="${none}"></span>
         </div>
     </div>
     <div id="totalBenefitPrice">
         <h4 th:text="${totalBenefitPriceHeader}"></h4>
         <div class="info">
-            <span th:text="${#numbers.formatInteger(
+            <span th:if="${order.totalPrice() >= promotionApplicableMin}"
+                  th:text="${#numbers.formatInteger(
             benefit.totalBenefitPrice(), 1,'COMMA') + won}"></span>
+            <span th:if="${order.totalPrice() < promotionApplicableMin}"
+                  th:text="'0'+${won}"></span>
         </div>
     </div>
     <div id="purchasePrice">
         <h4 th:text="${purchasePriceHeader}"></h4>
         <div class="info">
-            <span th:text="${#numbers.formatInteger(
+            <span th:if="${order.totalPrice() >= promotionApplicableMin}"
+                  th:text="${#numbers.formatInteger(
             order.totalPrice() + benefit.totalBenefitPrice(), 1, 'COMMA') + won}"></span>
+            <span th:if="${order.totalPrice() < promotionApplicableMin}"
+                  th:text="${#numbers.formatInteger(order.totalPrice(), 1, 'COMMA') + won}"></span>
         </div>
     </div>
     <div id="membership">
         <h4 th:text="${membershipHeader}"></h4>
         <div class="info">
-            <span th:text="${benefit.membership()}"></span>
+            <span th:if="${order.totalPrice() >= promotionApplicableMin}"
+                  th:text="${benefit.membership()}"></span>
+            <span th:if="${order.totalPrice() < promotionApplicableMin}"
+                  th:text="${none}"></span>
         </div>
     </div>
 </div>

@@ -4,11 +4,13 @@ import static imbesky.promotion.constant.Format.BENEFIT_FORMAT;
 import static imbesky.promotion.constant.Format.FREE_GIFT_FORMAT;
 import static imbesky.promotion.constant.Format.ORDER_FORMAT;
 import static imbesky.promotion.constant.Format.WON;
+import static imbesky.promotion.constant.Number.PROMOTION_APPLICABLE_MIN_PRICE;
 import static imbesky.promotion.constant.ResultMessage.BENEFIT_DETAIL;
 import static imbesky.promotion.constant.ResultMessage.FREE_GIFT;
 import static imbesky.promotion.constant.ResultMessage.HEADER;
 import static imbesky.promotion.constant.ResultMessage.MEMBERSHIP;
 import static imbesky.promotion.constant.ResultMessage.ORDER;
+import static imbesky.promotion.constant.ResultMessage.PROMOTION_EXCLUDE;
 import static imbesky.promotion.constant.ResultMessage.PURCHASE_PRICE;
 import static imbesky.promotion.constant.ResultMessage.RESULT_NOTICE;
 import static imbesky.promotion.constant.ResultMessage.TOTAL_BENEFIT;
@@ -48,6 +50,8 @@ public class ResultController {
 
         model.addAttribute("resultNotice",
                 String.format(RESULT_NOTICE, visitDate.month(), visitDate.date()));
+        model.addAttribute("promotionExclude", PROMOTION_EXCLUDE);
+        model.addAttribute("promotionApplicableMin", PROMOTION_APPLICABLE_MIN_PRICE);
         model.addAttribute("orderHeader",
                 String.format(HEADER, ORDER));
         model.addAttribute("totalPriceHeader",

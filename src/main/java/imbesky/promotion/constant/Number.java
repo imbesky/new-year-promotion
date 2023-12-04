@@ -11,4 +11,5 @@ public class Number {
     public final static int VISIT_NUMBER_WEEKDAY_MAX = 6;
     public final static int VISIT_NUMBER_WEEKEND_MAX = 12;
     public final static int MINUS = -1;
+    public final static int PROMOTION_APPLICABLE_MIN_PRICE = 10_000;
 }
