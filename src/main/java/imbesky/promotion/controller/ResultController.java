@@ -3,7 +3,6 @@ package imbesky.promotion.controller;
 import static imbesky.promotion.constant.Format.BENEFIT_FORMAT;
 import static imbesky.promotion.constant.Format.FREE_GIFT_FORMAT;
 import static imbesky.promotion.constant.Format.ORDER_FORMAT;
-import static imbesky.promotion.constant.Format.PRICE_FORMAT;
 import static imbesky.promotion.constant.Format.WON;
 import static imbesky.promotion.constant.ResultMessage.BENEFIT_DETAIL;
 import static imbesky.promotion.constant.ResultMessage.FREE_GIFT;
@@ -20,7 +19,6 @@ import imbesky.promotion.domain.dto.BenefitDto;
 import imbesky.promotion.domain.dto.OrderDto;
 import imbesky.promotion.domain.dto.VisitDateDto;
 import imbesky.promotion.service.ResultService;
-import java.text.DecimalFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -38,13 +36,11 @@ public class ResultController {
         final VisitDateDto visitDate = resultService.visitDateResult();
         final OrderDto order = resultService.orderResult();
         final BenefitDto benefit = resultService.benefitResult();
-        final DecimalFormat decimalFormat = new DecimalFormat(PRICE_FORMAT);
 
         model.addAttribute("order", order);
         model.addAttribute("benefit", benefit);
 
         model.addAttribute("none", Format.NONE);
-        model.addAttribute("decimalFormat", decimalFormat);
         model.addAttribute("orderFormat", ORDER_FORMAT);
         model.addAttribute("freeGiftFormat", FREE_GIFT_FORMAT);
         model.addAttribute("benefitFormat", BENEFIT_FORMAT);

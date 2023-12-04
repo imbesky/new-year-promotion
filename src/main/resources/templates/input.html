@@ -3,12 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <title>visit</title>
+    <link href="
+https://cdn.jsdelivr.net/npm/@picocss/pico@1.5.10/css/pico.min.css
+" rel="stylesheet">
 </head>
 <body>
 <div>
     <h2 th:text="${greeting}"></h2>
     <div>
-        <form action="/input">
+        <form action="/enter">
             <div>
                 <label for="date" th:text="${dateLabel}"></label>
                 <input type="date" id="date" name="date">
@@ -34,7 +37,7 @@
                                 </tr>
                                 <tr th:each="detail : ${menu.value}">
                                     <td th:text="${detail.getName()}"></td>
-                                    <td th:text="${detail.getPrize()}"></td>
+                                    <td th:text="${detail.getPrice()}"></td>
                                 </tr>
                             </table>
                         </td>
@@ -47,7 +50,7 @@
                 <span th:text="${orderNotice}"></span>
             </div>
             <div>
-                <button type="submit"></button>
+                <button type="submit" th:text="${submit}"></button>
             </div>
         </form>
     </div>

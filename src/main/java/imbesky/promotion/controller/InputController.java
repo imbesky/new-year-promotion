@@ -14,6 +14,7 @@ import static imbesky.promotion.constant.InputMessage.NUMBER_NOTICE;
 import static imbesky.promotion.constant.InputMessage.ORDER_FORMAT_EXAMPLE;
 import static imbesky.promotion.constant.InputMessage.ORDER_LABEL;
 import static imbesky.promotion.constant.InputMessage.ORDER_NOTICE;
+import static imbesky.promotion.constant.InputMessage.SUBMIT;
 import static imbesky.promotion.constant.Menu.MENUS;
 import static imbesky.promotion.constant.Number.ORDER_MAX;
 import static imbesky.promotion.constant.Number.ORDER_MIN;
@@ -41,10 +42,10 @@ public class InputController {
 
     @GetMapping("/")
     public String index() {
-        return REDIRECT.concat("visit");
+        return REDIRECT.concat("input");
     }
 
-    @GetMapping("/visit")
+    @GetMapping("/input")
     public void visit(final Model model) {
         model.addAttribute("greeting", GREETING);
 
@@ -68,16 +69,19 @@ public class InputController {
         model.addAttribute("orderFormat", ORDER_FORMAT_EXAMPLE);
         model.addAttribute("orderNotice",
                 String.format(ORDER_NOTICE, ORDER_MIN, ORDER_MAX));
+
+        model.addAttribute("submit", SUBMIT);
     }
 
-    @GetMapping("/input")
+    @GetMapping("/enter")
     public String visitInput(final InputDto inputDto, final RedirectAttributes redirectAttributes) {
         try {
             inputService.save(inputDto);
             return REDIRECT.concat("result");
         } catch (IllegalArgumentException e) {
-            redirectAttributes.addAttribute("message", e.getMessage());
-            return ERROR_PAGE;
+            redirectAttributes.addAttribute("reason", e.getMessage());
+            return REDIRECT.concat(ERROR_PAGE);
         }
     }
+
 }

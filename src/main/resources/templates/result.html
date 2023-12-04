@@ -3,6 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>benefit</title>
+    <link href="
+https://cdn.jsdelivr.net/npm/@picocss/pico@1.5.10/css/pico.min.css
+" rel="stylesheet">
 </head>
 <body>
 <div>
@@ -16,7 +19,7 @@
     <div id="totalPrice">
         <h3 th:text="${totalPriceHeader}"></h3>
         <div>
-            <span th:text="${decimalFormat.format(order.totalPrice()).concat(won)}"></span>
+            <span th:text="${#numbers.formatInteger(order.totalPrice(), 1,'COMMA') + won}"></span>
         </div>
     </div>
     <div id="freeGift">
@@ -33,7 +36,7 @@
         <div th:if="${benefit.discounts().size != 0}"
              th:each="discount : ${benefit.discounts()}">
             <span th:text="${T(java.lang.String).format(benefitFormat, discount.key,
-            decimalFormat.format(discount.value).concat(won))}"></span>
+            #numbers.formatInteger(discount.value, 1,'COMMA'))}"></span>
         </div>
         <div th:if="${benefit.discounts().size == 0}">
             <span th:text="${none}"></span>
@@ -42,14 +45,15 @@
     <div id="totalBenefitPrice">
         <h3 th:text="${totalBenefitPriceHeader}"></h3>
         <div>
-            <span th:text="${decimalFormat.format(benefit.totalBenefitPrice()).concat(won)}"></span>
+            <span th:text="${#numbers.formatInteger(
+            benefit.totalBenefitPrice(), 1,'COMMA') + won}"></span>
         </div>
     </div>
     <div id="purchasePrice">
         <h3 th:text="${purchasePriceHeader}"></h3>
         <div>
-            <span th:text="${decimalFormat.format(order.totalPrice()
-            + benefit.totalBenefitPrice()).concat(won)}"></span>
+            <span th:text="${#numbers.formatInteger(
+            order.totalPrice() + benefit.totalBenefitPrice(), 1, 'COMMA') + won}"></span>
         </div>
     </div>
     <div id="membership">

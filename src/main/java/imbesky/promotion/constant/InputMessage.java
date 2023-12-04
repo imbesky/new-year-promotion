@@ -10,6 +10,7 @@ public class InputMessage {
     public static final String MENU_NAME = "메뉴명";
     public static final String MENU_PRICE = "가격";
     public static final String ORDER_LABEL = "주문서";
-    public static final String ORDER_FORMAT_EXAMPLE = String.format(Format.ORDER_FORMAT, "메뉴 이름", 1);
+    public static final String ORDER_FORMAT_EXAMPLE = "메뉴이름-개수,메뉴이름-개수";
     public static final String ORDER_NOTICE = "메뉴 주문은 방문 인원당 최소 %d개, 최대 %d개 입니다.";
+    public static final String SUBMIT = "조회하기";
 }
