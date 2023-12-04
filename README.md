@@ -2,9 +2,16 @@
 
 [우아한 테크코스 6기 프리코스 미션 '크리스마스 프로모션'](https://github.com/woowacourse-precourse/java-christmas-6) 변형 프로젝트
 
-## 사용 기술
+## 프로젝트 개요
 
-`Java 17` `Spring 3.2.0`
+### 사용 기술
+
+`Java 17`
+`Spring 3.2.0`
+
+### 작업 기간
+
+`2023.12.01 ~ 2023.12.04`
 
 ## 요구 기능
 
